@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/Core/">
+    <Project Path="Core/DestekPaneli.Application/DestekPaneli.Application.csproj" />
+    <Project Path="Core/DestekPaneli.Domain/DestekPaneli.Domain.csproj" />
+  </Folder>
+  <Folder Name="/Infrastructure/">
+    <Project Path="Infrastructure/DestekPaneli.Persistence/DestekPaneli.Persistence.csproj" />
+  </Folder>
+  <Folder Name="/Presentation/">
+    <Project Path="Presentation/DestekPaneli.WebAPI/DestekPaneli.WebAPI.csproj" />
+  </Folder>
+</Solution>
