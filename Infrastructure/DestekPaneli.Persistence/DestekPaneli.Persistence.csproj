@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="UnitOfWork\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\DestekPaneli.Application\DestekPaneli.Application.csproj" />
     <ProjectReference Include="..\..\Core\DestekPaneli.Domain\DestekPaneli.Domain.csproj" />
   </ItemGroup>
 
