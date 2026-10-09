@@ -1,4 +1,5 @@
 using Carter;
+using DestekPaneli.Application.Interfaces.Repositories;
 using DestekPaneli.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
@@ -13,9 +14,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(opt =>
     string con = builder.Configuration.GetConnectionString("SqlServer");
     opt.UseSqlServer(con);
 });
+builder.Services.AddScoped<IAuthService, IAuthService>();
+builder.Services.AddScoped<ITicketService, ITicketService>();
+
 
 var app = builder.Build();
-
 
 if (app.Environment.IsDevelopment())
 {
@@ -23,7 +26,7 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference();
 }
 app.UseHttpsRedirection();
-//a
+
 
 app.UseCors(x => x
 .AllowAnyOrigin()
