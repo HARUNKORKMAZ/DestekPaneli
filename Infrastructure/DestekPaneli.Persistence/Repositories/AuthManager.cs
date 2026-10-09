@@ -1,10 +1,9 @@
-﻿using DestekPaneli.Application.DTOs;
+﻿using DestekPaneli.Application.Common.Models;
+using DestekPaneli.Application.DTOs;
 using DestekPaneli.Application.Interfaces.Repositories;
+using DestekPaneli.Domain.Entities;
 using DestekPaneli.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DestekPaneli.Persistence.Repositories
 {
@@ -15,18 +14,33 @@ namespace DestekPaneli.Persistence.Repositories
         {
             _context = context;
         }
-        public async Task<string> LoginAsync(LoginRequestDto request)
+        public async Task<BaseResponse<string>> LoginAsync(LoginRequestDto request)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Email == request.Email && x.Password == request.Password);
+            if (user == null)
+                return BaseResponse<string>.Fail("Geçersiz email veya şifre.", 401);
+
+            return BaseResponse<string>.Success("Giriş Başarılı.");
+        }
+
+        public async Task<BaseResponse<object>> RegisterAsync(RegisterRequestDto request)
         {
             var existingUser = await _context.Users.AnyAsync(x => x.Email == request.Email);
             if (existingUser)
             {
-                this new 
+                return BaseResponse<object>.Fail("Bu email adresi ile zaten bir kayıt mevcut.");
             }
-        }
+            var user = new User
+            {
+                FullName = request.FullName,
+                Email = request.Email,
+                Password = request.Password,
+                Role = "User"
+            };
 
-        public Task RegisterAsync(RegisterRequestDto request)
-        {
-            throw new NotImplementedException();
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
+            return BaseResponse<object>.Success("Kayıt işlemi başarılıyla gerçekleşti.");
         }
     }
 }

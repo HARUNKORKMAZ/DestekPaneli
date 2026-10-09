@@ -5,7 +5,7 @@ namespace DestekPaneli.Application.Interfaces.Repositories
 {
     public interface IAuthService
     {
-        Task<BaseResponse> RegisterAsync(RegisterRequestDto request);
+        Task<BaseResponse<object>> RegisterAsync(RegisterRequestDto request);
         Task<BaseResponse<string>> LoginAsync(LoginRequestDto request);
     }
 }
