@@ -1,5 +1,4 @@
-﻿using Ardalis.SmartEnum;
-using DestekPaneli.Domain.Common;
+﻿using DestekPaneli.Domain.Common;
 using DestekPaneli.Domain.Enums;
 
 namespace DestekPaneli.Domain.Entities
