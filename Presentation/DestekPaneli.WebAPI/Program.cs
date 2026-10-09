@@ -1,3 +1,4 @@
+using Carter;
 using DestekPaneli.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
 builder.Services.AddCors();
+builder.Services.AddCarter();
 builder.Services.AddDbContext<ApplicationDbContext>(opt =>
 {
     string con = builder.Configuration.GetConnectionString("SqlServer");
@@ -29,7 +31,7 @@ app.UseCors(x => x
 .AllowAnyMethod()
 .SetPreflightMaxAge(TimeSpan.FromMinutes(10))
 );
-
+app.MapCarter();
 
 
 
